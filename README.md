@@ -1,11 +1,18 @@
 
 # tuneUp
-Music recommender system
+Movie recommender system
 
 Work started as part of Coursework of Information Retrieval Semester I 2015-2016
 
 ## Work Plan
-* We could call a C++/ Rust api from Python to make things faster. Though I am not sure as to how much time can we devote, given the obscene amount of upcoming tests.
-* We will use item based collaborative filtering, since that works well with items like music, movies.
-* [Dataset:](http://www.dtic.upf.edu/~ocelma/MusicRecommendationDataset/index.html)
-Note that there are a couple of datasets there.	
+* This uses an Item based collaborative filtering approach.
+* [Dataset:](http://grouplens.org/datasets/movielens/latest/)
+
+## Implemetation
+* Use (Adjusted Cosine Similarity)[http://www.cs.carleton.edu/cs_comps/0607/recommend/recommender/itembased.html] Function
+* Tech: MongoDB + Python. Try to use a systems language for prediction (C++/ Rust)  
+
+### Work Assignment
+* @psdh: prediction using similarity matrix
+* @h4ck3rk3y: Initial Matrix building and Adjusted Cosine Similarity calculating function
+* @varunwachaspati: Second part of the assignment
