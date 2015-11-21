@@ -6,7 +6,7 @@ import sys
 MOVIE_COUNT = 3883
 USER_COUNT = 6040
 
-graph = GraphDatabase("http://localhost:7474/db/data/", username="neo4j", password="admin")
+graph = GraphDatabase("http://172.17.30.135:7474/db/data/", username="neo4j", password="admin")
 user_average = {}
 related_users = {}
 nodes = {}
@@ -68,6 +68,7 @@ def score(i, j):
 
 def main():
 
+	print "%s %s" %(sys.argv[1], sys.argv[2])
 	print "This program goes through the graph and finds the similarity between given items"
 	get_nodes()
 	print "Nodes Processed"
@@ -76,7 +77,7 @@ def main():
 	get_related_users()
 	print "Related users pre processed"
 
-	for i in xrange(sys.argv[1], sys.argv[2]):
+	for i in xrange(int(sys.argv[1]), int(sys.argv[2])):
 		print i
 		if bad_nodes[i] == True:
 			continue
