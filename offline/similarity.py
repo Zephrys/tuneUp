@@ -76,7 +76,7 @@ def main():
 	get_related_users()
 	print "Related users pre processed"
 
-	for i in xrange(1, MOVIE_COUNT + 1):
+	for i in xrange(sys.argv[1], sys.argv[2]):
 		print i
 		if bad_nodes[i] == True:
 			continue
