@@ -10,7 +10,7 @@ import sys
 from time import sleep
 from prettytable import PrettyTable
 
-print "pandas loaded"
+print "Pandas loaded"
 
 graph = GraphDatabase("http://172.17.30.135:7474/db/data/", username="neo4j", password="admin")
 
@@ -31,13 +31,6 @@ for smov_id in xrange(1, 3884):
     except KeyError:
         a[smov_id] = 0
         continue
-
-# ko = csv.lookup([1193, 1193], ["similar", "score"])
-# a = [ko]*3884
-# # print a
-# outfile = open('outfile', 'w')
-# outfile.write("li = ")
-# outfile.write(str(a))
 
 print "Loaded Everything"
 
