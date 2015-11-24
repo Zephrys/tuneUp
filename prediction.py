@@ -40,8 +40,11 @@ def main():
 
     while True:
         user_id = raw_input("Enter the User ID corresponding to which you'd like predictions or press Q/q to quit\n> ")
+
         if user_id.lower() == 'q':
             sys.exit(0)
+        else:
+            print "Loading! \n"
 
         query = """MATCH (u:User)-[r:RATED]->(m:Movie) WHERE u.name='%s'  RETURN m.name, r.score""" % user_id
         result = graph.query(query, data_contents=True)
@@ -75,6 +78,9 @@ def main():
                             num += movie_exists[y] * float(str(similar_dict[y]))
                             deno += float(similar_dict[y])
 
+                    if deno == 0.0:
+                        continue
+
                     if prediction.get(str(num/deno), False):
                         prediction[str(num/deno)] += [movie_id]
                     else:
@@ -98,7 +104,6 @@ def main():
                 break
 
         print table
-        return
 
 if __name__ == '__main__':
     main()
