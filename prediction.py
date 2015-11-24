@@ -44,7 +44,11 @@ def main():
         if user_id.lower() == 'q':
             sys.exit(0)
         else:
+            if int(user_id) > 6000:
+                print "Enter User ID < 6000"
+                continue
             print "Loading! \n"
+
 
         query = """MATCH (u:User)-[r:RATED]->(m:Movie) WHERE u.name='%s'  RETURN m.name, r.score""" % user_id
         result = graph.query(query, data_contents=True)
