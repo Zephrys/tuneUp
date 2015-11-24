@@ -1,5 +1,5 @@
-# 
-# Prediction.py 
+#
+# Prediction.py
 #
 
 import neo4jrestclient
@@ -26,7 +26,7 @@ for smov_id in xrange(1, 3884):
     try:
         if smov_id % 500 == 0:
             print smov_id, "now"
-        
+
         a[smov_id] = csv.lookup([smov_id, smov_id], ["similar", "score"])
     except KeyError:
         a[smov_id] = 0
@@ -43,11 +43,10 @@ def main():
         if user_id.lower() == 'q':
             sys.exit(0)
 
-
-        query = """MATCH (u:User)-[r:RATED]->(m:Movie) WHERE u.name='%s'  RETURN m.name, r.score""" %user_id
-        result = graph.query(query, data_contents=True) 
+        query = """MATCH (u:User)-[r:RATED]->(m:Movie) WHERE u.name='%s'  RETURN m.name, r.score""" % user_id
+        result = graph.query(query, data_contents=True)
         movie_exists = {int(x[0]): float(str(x[1])) for x in result.rows}
-        
+
         # print result.rows
         prediction = {}
 
@@ -67,7 +66,7 @@ def main():
                     similar_id = a1.tolist()[0].tolist()
 
                     similar_dict = dict(zip(similar_id, similar_score))
-                    
+
                     num = 0.0
                     deno = 0.0
 
@@ -76,34 +75,30 @@ def main():
                             num += movie_exists[y] * float(str(similar_dict[y]))
                             deno += float(similar_dict[y])
 
-
                     if prediction.get(str(num/deno), False):
                         prediction[str(num/deno)] += [movie_id]
                     else:
                         prediction[str(num/deno)] = [movie_id]
-        
-        key_s = sorted(prediction.keys() , reverse = True)
+
+        key_s = sorted(prediction.keys(), reverse=True)
 
         count = 0
 
         print "loading movies.csv now! "
-        movies_csv = pd.read_csv('data/movies.csv', index_col=0, names=["Id", "name", "genres"], encoding='iso-8859-1')
-
-
+        movies_csv = pd.read_csv('data/movies.csv', index_col=0, names=["Id", "name", "genre"], encoding='iso-8859-1')
 
         table = PrettyTable(["Movie ID", "Movie Name", "Score"])
 
         for key in key_s:
             count = count + len(prediction[key])
             for movie in prediction[key][:10]:
-                ans =  movies_csv.lookup([movie], ["name"]).tolist()
-                table.add_row([str(movie), ans[0], str(key)]) 
+                ans = movies_csv.lookup([movie], ["name"]).tolist()
+                table.add_row([str(movie), ans[0], str(key)])
             if count >= 10:
                 break
 
-
         print table
-
+        return
 
 if __name__ == '__main__':
     main()
