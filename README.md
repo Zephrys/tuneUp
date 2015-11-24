@@ -10,7 +10,7 @@ Work started as part of Coursework of Information Retrieval Semester I 2015-2016
 
 ## Implemetation
 * Use [Adjusted Cosine Similarity](http://www.cs.carleton.edu/cs_comps/0607/recommend/recommender/itembased.html) Function to compute the similarity matrix.
-* Check the [Design Document](https://docs.google.com/a/bits-pilani.ac.in/document/d/1qD8_vP394yTa9A21jmqyrPaDvecd87O89HsDj4jiJ-o/edit?usp=sharing) for more details.
+* Check the [Design Document](https://docs.google.com/document/d/1qD8_vP394yTa9A21jmqyrPaDvecd87O89HsDj4jiJ-o/edit) for more details.
 * Tech: Neo4j + Python.
 
 <!-- ## TODO
